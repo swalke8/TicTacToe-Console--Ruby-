@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'swttt-gem'
+
 class Human
 
   attr_reader :game_board

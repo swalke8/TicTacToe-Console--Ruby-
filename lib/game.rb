@@ -1,5 +1,3 @@
-require 'human'
-
 class Game
   attr_reader :board, :players, :observer
 
