@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'swttt-gem'
 require 'game'
 require 'real_console'
 

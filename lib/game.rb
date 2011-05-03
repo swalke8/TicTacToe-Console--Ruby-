@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'swttt-gem'
 require 'human'
 
 class Game
