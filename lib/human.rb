@@ -14,7 +14,7 @@ class Human
   def move
     row, column = prompt("Row: "), prompt("Column: ")
     if !@game_board.is_empty_at?(row-1, column-1)
-      puts "Invalid move (#{row}, #{column})"
+      @console.puts "Invalid move (#{row}, #{column})"
       move
     else
       @player.move(row-1, column-1)
@@ -32,7 +32,7 @@ private
     value = -1
     value = @console.gets.to_i 
     if !valid_row_or_column?(value)
-      puts "Invalid #{row_or_column.downcase.delete(": ")} value #{value}"
+      @console.puts "Invalid #{row_or_column.downcase.delete(": ")} value #{value}"
       prompt(row_or_column)
     else
       return value

@@ -10,8 +10,7 @@ class Game
 
   def prompt_for_players
     display_options
-    option = @console.gets
-    option = option.to_i
+    option = @console.gets.to_i
     if valid_game_option?(option)
       set_game_option(option)
     else
@@ -19,25 +18,15 @@ class Game
     end
   end
 
-  def set_players(player1, player2)
-    @players[0], @players[1] = player1, player2
-    (0...@players.size).each do |player|
-      @players[player] = Human.new(@board, @console) if @players[player] == "human"
-      @players[player] = MinimaxComputer.new(@board, @observer) if @players[player] == "computer"
-    end
-  end
-
   def execute
+    @board.print
     while !@observer.game_over?
-      @board.print
-      @players[0].move
-      @board.print
-      @players[1].move if !@observer.game_over?
+      @players.each { |player| next_move(player) }
     end
     display_winner
   end
 
-  private
+private
 
   def display_options
     @console.puts "1. Human vs. Human"
@@ -52,11 +41,27 @@ class Game
 
   def set_game_option(option)
     if option == 1
-      set_players("human", "human")
+      player1, player2 = "human", "human"
     elsif option == 2
-      set_players("human", "computer")
+      player1, player2 = "human", "computer"
     else
-      set_players("computer", "computer")
+      player1, player2 = "computer", "computer"
+    end
+    set_players(player1, player2)
+  end
+
+  def set_players(player1, player2)
+    @players[0], @players[1] = player1, player2
+    (0...@players.size).each do |player|
+      @players[player] = Human.new(@board, @console) if @players[player] == "human"
+      @players[player] = MinimaxComputer.new(@board, @observer) if @players[player] == "computer"
+    end
+  end
+
+  def next_move(player)
+    if !@observer.game_over?
+      player.move
+      @board.print
     end
   end
 
