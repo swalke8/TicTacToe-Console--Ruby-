@@ -29,7 +29,6 @@ class Human
 private
 
   def prompt_for_row_or_column_value(row_or_column)
-    value = -1
     value = @console.gets.to_i 
     if !valid_row_or_column?(value)
       @console.puts "Invalid #{row_or_column.downcase.delete(": ")} value #{value}"
