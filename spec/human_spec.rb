@@ -14,7 +14,7 @@ describe Human do
 
   context "Row" do
     before do
-      @player.prompt("Row: ")
+      @player.get_row_or_column("Row: ")
     end
 
     it "prompts for a row" do
@@ -27,14 +27,14 @@ describe Human do
 
     it "validates a row value" do
       @console.array_gets = [4,"a",0,1]
-      @player.prompt("Row: ")
+      @player.get_row_or_column("Row: ")
       @console.array_gets.should == []
     end
   end
 
   context "Column" do
     before do
-      @player.prompt("Column: ")
+      @player.get_row_or_column("Column: ")
     end
 
     it "prompts for a column" do
@@ -47,7 +47,7 @@ describe Human do
 
     it "validates a column value" do
       @console.array_gets = [-1,'h',2]
-      @player.prompt("Column: ")
+      @player.get_row_or_column("Column: ")
       @console.array_gets.should == []
     end
   end
