@@ -11,11 +11,7 @@ class Game
   def prompt_for_players
     display_options
     option = @console.gets.to_i
-    if valid_game_option?(option)
-      set_game_option(option)
-    else
-      prompt_for_players
-    end
+    validate_option(option)
   end
 
   def execute
@@ -33,6 +29,14 @@ private
     @console.puts "2. Human vs. Computer"
     @console.puts "3. Computer vs. Computer"
     @console.print "Select a game mode: "
+  end
+
+  def validate_option(option)
+    if valid_game_option?(option)
+      set_game_option(option)
+    else
+      prompt_for_players
+    end
   end
 
   def valid_game_option?(option)
