@@ -13,11 +13,11 @@ class Human
 
   def move
     row, column = get_row_or_column("Row: "), get_row_or_column("Column: ")
-    if !@game_board.is_empty_at?(row-1, column-1)
+    if !@game_board.is_empty_at?(row, column)
       @console.puts "Invalid move (#{row}, #{column})"
       move
     else
-      @player.move(row-1, column-1)
+      @player.move(row, column)
     end
   end
 
@@ -39,6 +39,6 @@ private
   end
 
   def valid_row_or_column?(value)
-   value > 0 && value <= @game_board.dimension+1
+   value > 0 && value <= @game_board.dimension
   end
 end

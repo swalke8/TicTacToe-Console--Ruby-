@@ -15,7 +15,7 @@ class Game
   end
 
   def execute
-    @board.print
+    display_board
     while !@observer.game_over?
       @players.each { |player| next_move(player) }
     end
@@ -62,17 +62,35 @@ private
     end
   end
 
+  def display_board
+    (0...@board.dimension).each { |row| print_row(row) }
+    @console.puts "\n"
+  end
+
+  def print_row(row)
+    @console.puts "\n"
+    (0...@board.dimension).each { |column| print_square(row, column) }
+  end
+
+  def print_square(row, column)
+    @console.print "["
+    @console.print "X" if @board.value_at(row,column) == @board.player_one
+    @console.print "O" if @board.value_at(row,column) == @board.player_two
+    @console.print " " if @board.value_at(row,column).zero?
+    @console.print "]"
+  end
+
   def next_move(player)
     if !@observer.game_over?
       player.move
-      @board.print
+      display_board
     end
   end
 
   def display_winner
     if @observer.has_winner?
-      @console.puts "Player 1 wins!" if @board.player_value == -1
-      @console.puts "Player 2 wins!" if @board.player_value == 1
+      @console.puts "Player 1 wins!" if @board.winner == @board.player_one
+      @console.puts "Player 2 wins!" if @board.winner == @board.player_two
     else
       @console.puts "Cats game!"
     end
