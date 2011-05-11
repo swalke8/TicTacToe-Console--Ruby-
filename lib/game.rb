@@ -63,13 +63,13 @@ private
   end
 
   def display_board
-    (0...@board.dimension).each { |row| print_row(row) }
+    (1..@board.dimension).each { |row| print_row(row) }
     @console.puts "\n"
   end
 
   def print_row(row)
     @console.puts "\n"
-    (0...@board.dimension).each { |column| print_square(row, column) }
+    (1..@board.dimension).each { |column| print_square(row, column) }
   end
 
   def print_square(row, column)
